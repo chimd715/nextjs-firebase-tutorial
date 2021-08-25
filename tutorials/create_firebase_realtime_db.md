@@ -26,4 +26,4 @@
 
 ![권한 수정](resources/images/create_realtime_db_006.png)
 
-참고링크: https://css-tricks.com/intro-firebase-react/
+참고링크: <https://css-tricks.com/intro-firebase-react/>
