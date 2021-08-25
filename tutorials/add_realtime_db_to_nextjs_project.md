@@ -23,29 +23,18 @@ npm install --save firebase
 - firebase 모듈을 import 해서 사용합니다
 
 ```javascript
-// Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/app";
-// If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
-// import * as firebase from "firebase/app"
-
-// If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
-
-// Add the Firebase products that you want to use
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/database";
 ```
 
 - 다음 config 코드를 작성해 앱에서 firebase를 초기화합니다
+(config 내용을 까먹었으면 [여기](find_firebase_app_config.md)를 참고하세요)
 
 ```javascript
-// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
 var firebaseConfig = {
   apiKey: "API_KEY",
   authDomain: "PROJECT_ID.firebaseapp.com",
-  // For databases not in the us-central1 location, databaseURL will be of the
-  // form https://[databaseName].[region].firebasedatabase.app.
-  // For example, https://your-database-123.europe-west1.firebasedatabase.app
   databaseURL: "https://PROJECT_ID.firebaseio.com",
   projectId: "PROJECT_ID",
   storageBucket: "PROJECT_ID.appspot.com",
@@ -60,6 +49,32 @@ var firebaseConfig = {
 ```javascript
 // Get a reference to the database service
 var database = firebase.database();
+
+// Read
+async function read(collection) {
+    let result = null;
+    await firebase.database().ref().child(collection).get().then((snapshot) => {
+        if (snapshot.exists()) result = snapshot.val();
+        else console.log("No data available");
+    }).catch(error => console.error(error));
+
+    return result;
+}
+
+// Write
+function write(collection, data) {
+  firebase.database().ref(collection).set(data);
+}
+```
+example code
+```javascript
+write("sample/", {
+  test: true
+});
+
+read("sample/");
 ```
 
 참고링크: <https://firebase.google.com/docs/database/web/read-and-write?hl=ko>
+
+참고자료: <https://blog.jarrodwatts.com/the-ultimate-guide-to-firebase-with-nextjs>
