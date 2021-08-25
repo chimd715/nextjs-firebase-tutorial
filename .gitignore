@@ -1,3 +1,40 @@
 # mac file system
 .DS_Store
 
+## project
+# secret
+/project/firebase_secret.json
+
+# dependencies
+/project/node_modules
+/project/.pnp
+/project/.pnp.js
+
+# testing
+/project/coverage
+
+# next.js
+/project/.next/
+/project/out/
+
+# production
+/project/build
+
+# misc
+/project/.DS_Store
+/project/*.pem
+
+# debug
+/project/npm-debug.log*
+/project/yarn-debug.log*
+/project/yarn-error.log*
+
+# local env files
+/project/.env.local
+/project/.env.development.local
+/project/.env.test.local
+/project/.env.production.local
+
+# vercel
+/project/.vercel
+
