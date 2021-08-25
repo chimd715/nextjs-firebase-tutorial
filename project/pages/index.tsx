@@ -3,6 +3,19 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+import { write_data, read_data } from '../custom_firebase/test_firebase'
+
+write_data("sample/", {
+  test: true, 
+  test_date: new Date().getTime(), 
+  hello: false
+});
+
+let data: {} | null = null;
+read_data("sample/").then((val) => {
+  data = val;
+});
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -16,6 +29,10 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <h5>
+          {data ? Object.keys(data) : "not available"}
+        </h5>
+
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
